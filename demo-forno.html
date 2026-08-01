@@ -1,0 +1,377 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Forno &amp; Brasa — demo</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,800&family=Karla:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#16120F;--card:#221D18;--card2:#2B2520;--line:#3A322B;--fire:#E8562F;--gold:#F2B33D;--cream:#F6EFE7;--mute:#A2948A;--disp:"Bricolage Grotesque",system-ui,sans-serif}
+*{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent}
+body{font-family:"Karla",system-ui,sans-serif;background:#0B0908;color:var(--cream);display:flex;justify-content:center;min-height:100vh}
+button{font:inherit;cursor:pointer;border:0;background:none;color:inherit}
+:focus-visible{outline:3px solid var(--gold);outline-offset:2px}
+h1,h2,h3{font-family:var(--disp);font-weight:800;letter-spacing:-.02em;line-height:1.1}
+.app{width:100%;max-width:420px;background:var(--bg);min-height:100vh;display:flex;flex-direction:column;position:relative;overflow:hidden}
+@media(min-width:520px){
+  body{align-items:center;padding:24px 0;background:radial-gradient(1000px 500px at 50% 0%,#2A1C13,#0B0908)}
+  .app{min-height:0;height:844px;border-radius:34px;box-shadow:0 30px 70px rgba(0,0,0,.6);border:8px solid #2A231D}
+}
+.top{padding:14px 18px 4px;flex:0 0 auto}
+.util{display:flex;align-items:center;justify-content:space-between;margin-bottom:12px}
+.back-link{color:var(--mute);font-size:12.5px;text-decoration:none;background:var(--card);padding:6px 11px;border-radius:16px}
+.langs{display:flex;gap:3px;background:var(--card);border-radius:16px;padding:3px}
+.lg{font-size:11.5px;font-weight:700;padding:4px 9px;border-radius:13px;color:var(--mute)}
+.lg[aria-pressed="true"]{background:var(--cream);color:#16120F}
+.brandrow{display:flex;align-items:center;gap:11px}
+.mark{width:42px;height:42px;border-radius:12px;background:linear-gradient(150deg,var(--fire),#B8321A);display:grid;place-items:center;font-size:21px}
+.brandrow h1{font-size:20px}
+.brandrow small{display:block;color:var(--mute);font-size:12px;margin-top:2px}
+.brandrow .st{margin-left:auto;background:rgba(99,201,154,.15);color:#63C99A;font-size:11px;font-weight:700;padding:5px 9px;border-radius:20px}
+.hero{margin:16px 18px 0;border-radius:18px;padding:20px;background:linear-gradient(135deg,#8E2A14,#C4401F);position:relative;overflow:hidden}
+.hero::after{content:"🔥";position:absolute;right:-6px;bottom:-14px;font-size:88px;opacity:.16}
+.hero small{font-family:var(--disp);font-weight:600;font-size:11px;letter-spacing:.13em;text-transform:uppercase;color:var(--gold)}
+.hero h2{font-size:24px;margin:6px 0 5px;max-width:15ch}
+.hero p{font-size:13.5px;opacity:.9;max-width:24ch}
+.cats{display:flex;gap:8px;overflow-x:auto;padding:16px 18px 4px;scrollbar-width:none;flex:0 0 auto}
+.cats::-webkit-scrollbar{display:none}
+.cat{flex:0 0 auto;background:var(--card);border:1px solid var(--line);border-radius:22px;padding:9px 15px;font-size:13.5px;font-weight:700;color:var(--mute)}
+.cat[aria-pressed="true"]{background:var(--cream);color:#16120F;border-color:var(--cream)}
+.scroll{flex:1;overflow-y:auto;padding:14px 18px 120px}
+.lbl{font-family:var(--disp);font-weight:600;font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--mute);margin:12px 0 11px}
+.item{width:100%;display:flex;gap:13px;background:var(--card);border:1px solid var(--line);border-radius:16px;padding:12px;margin-bottom:10px;text-align:left;transition:transform .12s}
+.item:active{transform:scale(.98)}
+.item .th{width:64px;height:64px;border-radius:12px;display:grid;place-items:center;font-size:30px;flex:0 0 auto}
+.item .in{flex:1;min-width:0}
+.item .in b{font-size:15.5px;font-family:var(--disp);font-weight:600;display:block}
+.item .in small{color:var(--mute);font-size:12.5px;display:block;margin:3px 0 7px;line-height:1.35}
+.item .pr{font-family:var(--disp);font-weight:800;color:var(--gold);font-size:16px}
+.sheet{position:absolute;inset:0;background:var(--bg);transform:translateY(100%);transition:transform .3s cubic-bezier(.4,0,.2,1);z-index:40;display:flex;flex-direction:column}
+.sheet.on{transform:translateY(0)}
+.sh-top{padding:16px 18px;display:flex;align-items:center;gap:12px;border-bottom:1px solid var(--line);flex:0 0 auto}
+.sh-top h2{font-size:17px;flex:1}
+.bk{width:34px;height:34px;border-radius:50%;background:var(--card2);display:grid;place-items:center;font-size:16px;flex:0 0 auto}
+.big-th{height:150px;border-radius:18px;display:grid;place-items:center;font-size:72px;margin-bottom:16px}
+.opt{width:100%;display:flex;align-items:center;gap:12px;background:var(--card);border:1.5px solid var(--line);border-radius:13px;padding:13px 14px;margin-bottom:8px;text-align:left;font-size:14.5px}
+.opt[aria-pressed="true"]{border-color:var(--fire);background:rgba(232,86,47,.1)}
+.opt .rd{width:19px;height:19px;border-radius:50%;border:2px solid var(--line);flex:0 0 auto}
+.opt[aria-pressed="true"] .rd{border-color:var(--fire);background:var(--fire);box-shadow:inset 0 0 0 3px var(--bg)}
+.opt .sq{width:19px;height:19px;border-radius:6px;border:2px solid var(--line);flex:0 0 auto;display:grid;place-items:center;font-size:11px;color:transparent}
+.opt[aria-pressed="true"] .sq{border-color:var(--fire);background:var(--fire);color:#fff}
+.opt .op{margin-left:auto;color:var(--gold);font-weight:700;font-size:14px}
+.qty{display:flex;align-items:center;gap:16px;justify-content:center;margin:22px 0 6px}
+.qty button{width:44px;height:44px;border-radius:50%;background:var(--card2);font-size:22px;font-weight:700;display:grid;place-items:center}
+.qty b{font-family:var(--disp);font-size:24px;min-width:32px;text-align:center}
+.footbar{position:absolute;left:0;right:0;bottom:0;padding:14px 18px calc(14px + env(safe-area-inset-bottom));background:var(--bg);border-top:1px solid var(--line);z-index:45}
+.cta{width:100%;background:var(--fire);color:#fff;border-radius:14px;padding:16px;font-family:var(--disp);font-weight:800;font-size:16.5px}
+.cta[disabled]{background:var(--card2);color:var(--mute)}
+.cta.gold{background:var(--gold);color:#231703}
+.cartbar{position:absolute;left:14px;right:14px;bottom:14px;background:var(--fire);border-radius:16px;padding:13px 16px;display:flex;align-items:center;gap:12px;z-index:30;box-shadow:0 12px 30px rgba(0,0,0,.5);transform:translateY(140%);transition:transform .28s cubic-bezier(.4,0,.2,1)}
+.cartbar.on{transform:translateY(0)}
+.cartbar .n{background:rgba(0,0,0,.25);border-radius:9px;padding:5px 10px;font-weight:700;font-size:14px}
+.cartbar .t{font-family:var(--disp);font-weight:800;font-size:15.5px;flex:1}
+.cartbar .go{font-weight:700;font-size:14.5px}
+.crow{display:flex;gap:12px;align-items:flex-start;background:var(--card);border:1px solid var(--line);border-radius:14px;padding:13px;margin-bottom:9px}
+.crow .em{font-size:26px}
+.crow .cin{flex:1;min-width:0}
+.crow .cin b{font-family:var(--disp);font-size:15px;display:block}
+.crow .cin small{color:var(--mute);font-size:12.5px;display:block;margin-top:2px}
+.crow .cp{font-weight:700;color:var(--gold);font-size:15px}
+.rm{color:var(--mute);font-size:12.5px;text-decoration:underline;margin-top:6px;display:inline-block}
+.tot{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:16px;margin-top:14px}
+.tl{display:flex;justify-content:space-between;font-size:14.5px;padding:6px 0;color:var(--mute)}
+.tl.f{border-top:1px dashed var(--line);margin-top:8px;padding-top:12px;color:var(--cream);font-family:var(--disp);font-weight:800;font-size:19px}
+.note{background:rgba(242,179,61,.1);border:1px solid rgba(242,179,61,.3);border-radius:12px;padding:13px;font-size:13px;color:var(--gold);margin-top:14px;line-height:1.45}
+.track{padding:26px 20px}
+.tick{width:72px;height:72px;border-radius:50%;background:var(--gold);color:#231703;display:grid;place-items:center;font-size:36px;margin:0 auto 16px;animation:pop .4s cubic-bezier(.2,1.4,.4,1)}
+@keyframes pop{from{transform:scale(.5);opacity:0}to{transform:scale(1);opacity:1}}
+.track h2{text-align:center;font-size:22px;margin-bottom:6px}
+.track .sub{text-align:center;color:var(--mute);font-size:14px;margin-bottom:26px}
+.steps{position:relative;padding-left:34px}
+.steps::before{content:"";position:absolute;left:11px;top:10px;bottom:26px;width:2px;background:var(--line)}
+.st{position:relative;margin-bottom:26px}
+.st::before{content:"";position:absolute;left:-31px;top:2px;width:24px;height:24px;border-radius:50%;background:var(--card2);border:2px solid var(--line)}
+.st.done::before{content:"✓";background:var(--gold);border-color:var(--gold);color:#231703;font-size:13px;font-weight:800;display:grid;place-items:center}
+.st.now::before{background:var(--fire);border-color:var(--fire);animation:pulse 1.6s infinite}
+@keyframes pulse{0%,100%{box-shadow:0 0 0 0 rgba(232,86,47,.5)}50%{box-shadow:0 0 0 9px rgba(232,86,47,0)}}
+.st b{font-family:var(--disp);font-size:15.5px;display:block}
+.st small{color:var(--mute);font-size:13px}
+.eta{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:16px;text-align:center;margin-top:6px}
+.eta b{font-family:var(--disp);font-size:26px;color:var(--gold);display:block}
+.eta small{color:var(--mute);font-size:13px}
+@media(prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important}}
+</style>
+</head>
+<body>
+<div class="app">
+  <div class="top">
+    <div class="util">
+      <a class="back-link" href="index.html" id="backLink">← voltar</a>
+      <div class="langs"><button class="lg" data-lang="pt" aria-pressed="true">PT</button><button class="lg" data-lang="en">EN</button><button class="lg" data-lang="es">ES</button></div>
+    </div>
+    <div class="brandrow">
+      <div class="mark">🔥</div>
+      <div><h1>Forno &amp; Brasa</h1><small data-i="sub"></small></div>
+      <div class="st" data-i="open"></div>
+    </div>
+  </div>
+
+  <div class="hero">
+    <small data-i="promoEye"></small>
+    <h2 data-i="promoT"></h2>
+    <p data-i="promoD"></p>
+  </div>
+
+  <div class="cats" id="cats"></div>
+  <div class="scroll" id="menu"></div>
+
+  <div class="cartbar" id="cartbar">
+    <span class="n" id="cbN">0</span><span class="t" id="cbT">$0.00</span><span class="go" data-i="viewCart"></span>
+  </div>
+
+  <div class="sheet" id="item">
+    <div class="sh-top"><button class="bk" data-close="item">←</button><h2 id="itName">—</h2></div>
+    <div class="scroll" style="padding-bottom:110px">
+      <div class="big-th" id="itTh">🍕</div>
+      <p style="color:var(--mute);font-size:14.5px;line-height:1.5" id="itDesc"></p>
+      <div id="sizeWrap"><div class="lbl" data-i="size"></div><div id="sizes"></div></div>
+      <div id="extraWrap"><div class="lbl" data-i="addons"></div><div id="extras"></div></div>
+      <div class="qty"><button id="qMinus" aria-label="-">−</button><b id="qN">1</b><button id="qPlus" aria-label="+">+</button></div>
+    </div>
+    <div class="footbar"><button class="cta" id="addBtn">—</button></div>
+  </div>
+
+  <div class="sheet" id="cart">
+    <div class="sh-top"><button class="bk" data-close="cart">←</button><h2 data-i="yourOrder"></h2></div>
+    <div class="scroll" style="padding-bottom:110px">
+      <div id="cartList"></div>
+      <div class="tot">
+        <div class="tl"><span data-i="subtotal"></span><span id="sub">$0.00</span></div>
+        <div class="tl"><span data-i="delivery"></span><span id="del">$4.00</span></div>
+        <div class="tl"><span data-i="appFee"></span><span style="color:#63C99A">$0.00</span></div>
+        <div class="tl f"><span data-i="total"></span><span id="tot">$0.00</span></div>
+      </div>
+      <div class="note" data-i="feeNote"></div>
+    </div>
+    <div class="footbar"><button class="cta gold" id="checkout" data-i="placeOrder"></button></div>
+  </div>
+
+  <div class="sheet" id="track">
+    <div class="sh-top"><button class="bk" data-close="track">←</button><h2><span data-i="orderWord"></span> <span id="ordId"></span></h2></div>
+    <div class="scroll" style="padding-bottom:110px">
+      <div class="track">
+        <div class="tick">🍕</div>
+        <h2 data-i="sentT"></h2>
+        <div class="sub" data-i="sentD"></div>
+        <div class="eta"><b id="etaTxt">35–45 min</b><small data-i="etaLbl"></small></div>
+        <div class="steps" style="margin-top:26px">
+          <div class="st done"><b data-i="stp1T"></b><small data-i="stp1D"></small></div>
+          <div class="st now" id="stPrep"><b data-i="stp2T"></b><small data-i="stp2D"></small></div>
+          <div class="st" id="stOut"><b data-i="stp3T"></b><small data-i="stp3D"></small></div>
+          <div class="st"><b data-i="stp4T"></b><small data-i="stp4D"></small></div>
+        </div>
+      </div>
+    </div>
+    <div class="footbar"><button class="cta" data-close="track" data-i="backMenu"></button></div>
+  </div>
+</div>
+
+<script>
+/* pratos: nome fica em português (é um restaurante brasileiro), o resto traduz */
+const DISHES = [
+ {c:0,em:"🍕",bg:"#7A2D14",nm:"Calabresa",pr:18,sz:0,ex:0},
+ {c:0,em:"🍕",bg:"#6E3A12",nm:"Frango com catupiry",pr:20,sz:0,ex:0},
+ {c:0,em:"🍕",bg:"#5B4014",nm:"Portuguesa",pr:19,sz:0,ex:0},
+ {c:1,em:"🍛",bg:"#5C3A17",nm:"Feijoada completa",pr:15,sz:1,ex:1},
+ {c:1,em:"🥩",bg:"#6B2E1C",nm:"Picanha na chapa",pr:17,sz:1,ex:1},
+ {c:1,em:"🍗",bg:"#5A4A16",nm:"Frango grelhado fit",pr:13,sz:1,ex:1},
+ {c:2,em:"🥤",bg:"#3C3A5C",nm:"Guaraná 2L",pr:5,sz:-1,ex:-1},
+ {c:2,em:"🧃",bg:"#4B5230",nm:"Suco natural 500ml",pr:6,sz:-1,ex:-1},
+ {c:3,em:"🍮",bg:"#5A4326",nm:"Pudim de leite",pr:7,sz:-1,ex:2},
+ {c:3,em:"🍫",bg:"#4A3222",nm:"Brigadeirão",pr:9,sz:-1,ex:2}
+];
+const EX_PRICES = [[4,3,1],[2,2,1],[1,2]];   /* pizza / marmita / sobremesa */
+const SZ_PRICES = [[0,5,11],[0,9]];          /* pizza / marmita */
+
+const T={
+pt:{code:"pt-BR",back:"← voltar",sub:"Kissimmee · entrega em 35–45 min",open:"Aberto",
+ promoEye:"Só hoje",promoT:"Pizza grande + refri por $24",promoD:"Peça direto com a gente. Sem taxa de aplicativo.",
+ cats:["Pizzas","Marmitas","Bebidas","Sobremesas"],
+ desc:["Molho de tomate, muçarela, calabresa fatiada e cebola.","Frango desfiado temperado e catupiry cremoso.","Presunto, ovo, cebola, azeitona e muçarela.","Feijoada, arroz, couve, farofa e laranja.","Picanha, arroz, feijão, fritas e vinagrete.","Frango, arroz integral, brócolis e legumes.","Gelado.","Laranja, maracujá ou abacaxi com hortelã.","Fatia generosa, receita da casa.","Serve 2 pessoas."],
+ sz:[["Média (6 fatias)","Grande (8 fatias)","Família (12 fatias)"],["Individual","Grande (2 pessoas)"]],
+ ex:[["Borda de catupiry","Queijo extra","Molho picante"],["Farofa extra","Vinagrete","Molho picante"],["Calda extra","Porção dupla"]],
+ size:"Tamanho",addons:"Adicionais",add:"Adicionar",viewCart:"Ver carrinho →",
+ yourOrder:"Seu pedido",subtotal:"Subtotal",delivery:"Entrega",appFee:"Taxa de aplicativo",total:"Total",
+ feeNote:"Pedindo aqui, o restaurante fica com 100% do valor. Em aplicativo de entrega, a comissão costuma levar de 15% a 30%.",
+ placeOrder:"Fazer pedido",emptyCart:"Seu carrinho está vazio.",remove:"remover",
+ orderWord:"Pedido",sentT:"Pedido enviado!",sentD:"A cozinha já recebeu no WhatsApp",etaLbl:"previsão de entrega",
+ stp1T:"Pedido recebido",stp1D:"Confirmado agora",stp2T:"Na brasa",stp2D:"Preparando o seu pedido",
+ stp3T:"Saiu para entrega",stp3D:"Você recebe um aviso no celular",stp4T:"Entregue",stp4D:"Bom apetite",
+ backMenu:"Voltar ao cardápio"},
+en:{code:"en",back:"← back",sub:"Kissimmee · delivery in 35–45 min",open:"Open",
+ promoEye:"Today only",promoT:"Large pizza + soda for $24",promoD:"Order straight from us. No app fee.",
+ cats:["Pizzas","Plates","Drinks","Desserts"],
+ desc:["Tomato sauce, mozzarella, sliced calabresa sausage and onion.","Shredded seasoned chicken with creamy catupiry cheese.","Ham, egg, onion, olives and mozzarella.","Black bean and pork stew with rice, collards, farofa and orange.","Picanha steak, rice, beans, fries and vinaigrette.","Chicken, brown rice, broccoli and vegetables.","Served cold.","Orange, passion fruit or pineapple with mint.","Generous slice, house recipe.","Serves 2."],
+ sz:[["Medium (6 slices)","Large (8 slices)","Family (12 slices)"],["Single","Large (serves 2)"]],
+ ex:[["Stuffed cheese crust","Extra cheese","Hot sauce"],["Extra farofa","Vinaigrette","Hot sauce"],["Extra syrup","Double portion"]],
+ size:"Size",addons:"Add-ons",add:"Add",viewCart:"View cart →",
+ yourOrder:"Your order",subtotal:"Subtotal",delivery:"Delivery",appFee:"App fee",total:"Total",
+ feeNote:"Ordering here, the restaurant keeps 100% of the money. On a delivery app, the commission usually takes 15% to 30%.",
+ placeOrder:"Place order",emptyCart:"Your cart is empty.",remove:"remove",
+ orderWord:"Order",sentT:"Order sent!",sentD:"The kitchen got it on WhatsApp",etaLbl:"estimated delivery",
+ stp1T:"Order received",stp1D:"Confirmed just now",stp2T:"On the grill",stp2D:"Your order is being made",
+ stp3T:"Out for delivery",stp3D:"You'll get an alert on your phone",stp4T:"Delivered",stp4D:"Enjoy",
+ backMenu:"Back to menu"},
+es:{code:"es",back:"← volver",sub:"Kissimmee · entrega en 35–45 min",open:"Abierto",
+ promoEye:"Solo hoy",promoT:"Pizza grande + refresco por $24",promoD:"Pide directo con nosotros. Sin cargo de aplicación.",
+ cats:["Pizzas","Platos","Bebidas","Postres"],
+ desc:["Salsa de tomate, mozzarella, chorizo calabresa y cebolla.","Pollo deshebrado con queso crema catupiry.","Jamón, huevo, cebolla, aceitunas y mozzarella.","Feijoada con arroz, berza, farofa y naranja.","Picanha, arroz, frijoles, papas y vinagreta.","Pollo, arroz integral, brócoli y verduras.","Bien fría.","Naranja, maracuyá o piña con hierbabuena.","Rebanada generosa, receta de la casa.","Alcanza para 2."],
+ sz:[["Mediana (6 rebanadas)","Grande (8 rebanadas)","Familiar (12 rebanadas)"],["Individual","Grande (2 personas)"]],
+ ex:[["Orilla rellena de queso","Queso extra","Salsa picante"],["Farofa extra","Vinagreta","Salsa picante"],["Salsa extra","Porción doble"]],
+ size:"Tamaño",addons:"Adicionales",add:"Agregar",viewCart:"Ver carrito →",
+ yourOrder:"Tu pedido",subtotal:"Subtotal",delivery:"Entrega",appFee:"Cargo de aplicación",total:"Total",
+ feeNote:"Pidiendo aquí, el restaurante se queda con el 100%. En una aplicación de entrega, la comisión suele llevarse del 15% al 30%.",
+ placeOrder:"Hacer pedido",emptyCart:"Tu carrito está vacío.",remove:"quitar",
+ orderWord:"Pedido",sentT:"¡Pedido enviado!",sentD:"La cocina ya lo recibió por WhatsApp",etaLbl:"entrega estimada",
+ stp1T:"Pedido recibido",stp1D:"Confirmado ahora",stp2T:"En la brasa",stp2D:"Preparando tu pedido",
+ stp3T:"Salió a entrega",stp3D:"Recibirás un aviso en el celular",stp4T:"Entregado",stp4D:"Buen provecho",
+ backMenu:"Volver al menú"}};
+
+let lang="pt", t=T.pt, cat=0, cur=-1, qty=1, size=0, chosen=[], cartItems=[];
+
+function pickLang(){
+  const q=new URLSearchParams(location.search).get("lang");
+  if(q&&T[q])return q;
+  const n=(navigator.language||"pt").slice(0,2).toLowerCase();
+  return T[n]?n:"en";
+}
+function apply(l){
+  lang=l; t=T[l];
+  document.documentElement.lang=t.code;
+  document.querySelectorAll("[data-i]").forEach(el=>{el.textContent=t[el.dataset.i];});
+  document.querySelectorAll(".lg").forEach(b=>b.setAttribute("aria-pressed",b.dataset.lang===l));
+  const bl=document.getElementById("backLink"); bl.textContent=t.back; bl.href="index.html?lang="+l;
+  document.getElementById("cats").innerHTML=t.cats.map((c,i)=>
+    `<button class="cat" data-cat="${i}" aria-pressed="${i===cat}">${c}</button>`).join("");
+  renderMenu(); renderCart();
+  if(cur>=0) openItem(cur, true);
+}
+function renderMenu(){
+  document.getElementById("menu").innerHTML=`<div class="lbl">${t.cats[cat]}</div>`+
+    DISHES.map((d,i)=>d.c!==cat?"":`
+      <button class="item" data-id="${i}"><span class="th" style="background:${d.bg}">${d.em}</span>
+      <span class="in"><b>${d.nm}</b><small>${t.desc[i]}</small><span class="pr">$${d.pr.toFixed(2)}</span></span></button>`).join("");
+}
+function openItem(i, keep){
+  cur=i; const d=DISHES[i];
+  if(!keep){ qty=1; size=0; chosen=[]; }
+  document.getElementById("itName").textContent=d.nm;
+  document.getElementById("itDesc").textContent=t.desc[i];
+  const th=document.getElementById("itTh"); th.textContent=d.em; th.style.background=d.bg;
+  const sw=document.getElementById("sizeWrap");
+  if(d.sz<0){ sw.style.display="none"; }
+  else{
+    sw.style.display="block";
+    document.getElementById("sizes").innerHTML=t.sz[d.sz].map((s,ix)=>`
+      <button class="opt" data-size="${ix}" aria-pressed="${ix===size}"><span class="rd"></span><span>${s}</span>${SZ_PRICES[d.sz][ix]?`<span class="op">+$${SZ_PRICES[d.sz][ix]}</span>`:""}</button>`).join("");
+  }
+  const ew=document.getElementById("extraWrap");
+  if(d.ex<0){ ew.style.display="none"; }
+  else{
+    ew.style.display="block";
+    document.getElementById("extras").innerHTML=t.ex[d.ex].map((x,ix)=>`
+      <button class="opt" data-extra="${ix}" aria-pressed="${chosen.includes(ix)}"><span class="sq">✓</span><span>${x}</span><span class="op">+$${EX_PRICES[d.ex][ix]}</span></button>`).join("");
+  }
+  document.getElementById("qN").textContent=qty;
+  priceItem();
+  document.getElementById("item").classList.add("on");
+}
+function unit(){
+  const d=DISHES[cur]; let p=d.pr;
+  if(d.sz>=0) p+=SZ_PRICES[d.sz][size];
+  if(d.ex>=0) chosen.forEach(i=>p+=EX_PRICES[d.ex][i]);
+  return p;
+}
+function priceItem(){ document.getElementById("addBtn").textContent=t.add+" · $"+(unit()*qty).toFixed(2); }
+
+document.getElementById("cats").addEventListener("click",e=>{
+  const b=e.target.closest(".cat"); if(!b)return;
+  cat=+b.dataset.cat;
+  document.querySelectorAll(".cat").forEach(c=>c.setAttribute("aria-pressed",+c.dataset.cat===cat));
+  renderMenu();
+});
+document.getElementById("menu").addEventListener("click",e=>{
+  const b=e.target.closest(".item"); if(!b)return;
+  openItem(+b.dataset.id,false);
+});
+document.getElementById("sizes").addEventListener("click",e=>{
+  const b=e.target.closest(".opt"); if(!b)return;
+  size=+b.dataset.size;
+  document.querySelectorAll("#sizes .opt").forEach((o,i)=>o.setAttribute("aria-pressed",i===size));
+  priceItem();
+});
+document.getElementById("extras").addEventListener("click",e=>{
+  const b=e.target.closest(".opt"); if(!b)return;
+  const i=+b.dataset.extra, at=chosen.indexOf(i);
+  if(at>=0)chosen.splice(at,1); else chosen.push(i);
+  b.setAttribute("aria-pressed",at<0);
+  priceItem();
+});
+document.getElementById("qPlus").addEventListener("click",()=>{qty=Math.min(qty+1,10);document.getElementById("qN").textContent=qty;priceItem();});
+document.getElementById("qMinus").addEventListener("click",()=>{qty=Math.max(qty-1,1);document.getElementById("qN").textContent=qty;priceItem();});
+
+document.getElementById("addBtn").addEventListener("click",()=>{
+  const d=DISHES[cur], parts=[];
+  if(d.sz>=0)parts.push(t.sz[d.sz][size]);
+  if(d.ex>=0)chosen.forEach(i=>parts.push(t.ex[d.ex][i]));
+  cartItems.push({em:d.em,nm:d.nm,d:parts.join(" · "),q:qty,p:unit()*qty});
+  document.getElementById("item").classList.remove("on");
+  cur=-1;
+  renderCart();
+});
+function renderCart(){
+  const n=cartItems.reduce((a,i)=>a+i.q,0), sub=cartItems.reduce((a,i)=>a+i.p,0);
+  document.getElementById("cartbar").classList.toggle("on",n>0);
+  document.getElementById("cbN").textContent=n;
+  document.getElementById("cbT").textContent="$"+sub.toFixed(2);
+  document.getElementById("cartList").innerHTML=cartItems.length?cartItems.map((i,ix)=>`
+    <div class="crow"><span class="em">${i.em}</span>
+    <span class="cin"><b>${i.q}× ${i.nm}</b><small>${i.d||"—"}</small><a class="rm" href="#" data-rm="${ix}">${t.remove}</a></span>
+    <span class="cp">$${i.p.toFixed(2)}</span></div>`).join("")
+    :`<p style="color:var(--mute);text-align:center;padding:40px 0">${t.emptyCart}</p>`;
+  const del=cartItems.length?4:0;
+  document.getElementById("sub").textContent="$"+sub.toFixed(2);
+  document.getElementById("del").textContent="$"+del.toFixed(2);
+  document.getElementById("tot").textContent="$"+(sub+del).toFixed(2);
+  document.getElementById("checkout").disabled=!cartItems.length;
+}
+document.getElementById("cartList").addEventListener("click",e=>{
+  const a=e.target.closest("[data-rm]"); if(!a)return;
+  e.preventDefault(); cartItems.splice(+a.dataset.rm,1); renderCart();
+});
+document.getElementById("cartbar").addEventListener("click",()=>document.getElementById("cart").classList.add("on"));
+document.getElementById("checkout").addEventListener("click",()=>{
+  document.getElementById("ordId").textContent="#"+Math.floor(1000+Math.random()*8999);
+  document.getElementById("cart").classList.remove("on");
+  document.getElementById("track").classList.add("on");
+  document.getElementById("stPrep").className="st now";
+  document.getElementById("stOut").className="st";
+  document.getElementById("etaTxt").textContent="35–45 min";
+  cartItems=[]; renderCart();
+  setTimeout(()=>{
+    document.getElementById("stPrep").className="st done";
+    document.getElementById("stOut").className="st now";
+    document.getElementById("etaTxt").textContent="12–18 min";
+  },4500);
+});
+document.querySelectorAll(".lg").forEach(b=>b.addEventListener("click",()=>apply(b.dataset.lang)));
+document.querySelectorAll("[data-close]").forEach(b=>b.addEventListener("click",()=>{
+  document.getElementById(b.dataset.close).classList.remove("on");
+  if(b.dataset.close==="item")cur=-1;
+}));
+apply(pickLang());
+</script>
+</body>
+</html>

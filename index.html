@@ -1,0 +1,660 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Duofront — app e site sob medida para negócios em Orlando</title>
+<meta name="description" content="Duofront: app e site com a marca do seu negócio. Agendamento, pedidos e lembrete automático. Feito sob medida em Winter Garden, Orlando.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@600;700;800&family=Karla:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --navy:#0E2440; --navy-2:#16345C; --citrus:#FFC431; --paper:#F4F6F8;
+  --ink:#0A1626; --mute:#6C7A8C; --line:#D9E0E7; --brand:#0F7B62;
+  --disp:"Barlow Condensed",Impact,sans-serif; --body:"Karla",system-ui,-apple-system,sans-serif;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{font-family:var(--body);color:var(--ink);background:#fff;line-height:1.55;-webkit-font-smoothing:antialiased}
+a{color:inherit}
+.wrap{width:100%;max-width:1120px;margin:0 auto;padding:0 20px}
+.eyebrow{font-family:var(--disp);font-weight:700;text-transform:uppercase;letter-spacing:.14em;font-size:14px}
+h1,h2,h3{font-family:var(--disp);font-weight:800;text-transform:uppercase;line-height:.95;letter-spacing:-.01em}
+h1{font-size:clamp(38px,8vw,72px)}
+h2{font-size:clamp(30px,5.5vw,50px)}
+h3{font-size:22px;letter-spacing:.01em}
+p{font-size:17px}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:9px;font-family:var(--disp);font-weight:700;text-transform:uppercase;letter-spacing:.06em;font-size:19px;padding:15px 26px;border-radius:4px;text-decoration:none;border:0;cursor:pointer;transition:transform .12s ease}
+.btn:hover{transform:translateY(-2px)}
+.btn-pri{background:var(--citrus);color:var(--navy)}
+.btn-gho{background:transparent;color:#fff;border:2px solid rgba(255,255,255,.35)}
+.btn-dark{background:var(--navy);color:#fff}
+:focus-visible{outline:3px solid var(--citrus);outline-offset:3px}
+
+.hero{position:relative;background:var(--navy);color:#fff;overflow:hidden;padding:22px 0 64px}
+.hero::after{content:"";position:absolute;left:-10%;right:-10%;top:56%;height:210px;background:var(--citrus);transform:rotate(-7deg);opacity:.09;pointer-events:none}
+.nav{display:flex;align-items:center;justify-content:space-between;gap:14px;flex-wrap:wrap;margin-bottom:34px}
+.logo{font-family:var(--disp);font-weight:800;font-size:23px;text-transform:uppercase;letter-spacing:.03em;display:flex;align-items:center;gap:9px}
+.logo span{width:13px;height:26px;background:var(--citrus);display:block;transform:skewX(-12deg)}
+.langs{display:flex;gap:4px;background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.16);border-radius:6px;padding:3px}
+.lg{font-family:var(--disp);font-weight:700;font-size:14px;letter-spacing:.08em;padding:6px 11px;border-radius:4px;border:0;background:none;color:#93A6BE;cursor:pointer}
+.lg[aria-pressed="true"]{background:var(--citrus);color:var(--navy)}
+.loc{font-family:var(--disp);font-weight:600;text-transform:uppercase;letter-spacing:.11em;font-size:13px;color:#93A6BE;width:100%}
+@media(min-width:700px){.loc{width:auto;order:2}.langs{order:3}}
+
+.hero-grid{display:grid;grid-template-columns:1fr;gap:44px;position:relative;z-index:2}
+.hero h1{margin-bottom:18px}
+.hero h1 em{font-style:normal;color:var(--citrus)}
+.hero .lead{font-size:19px;color:#C7D3E2;max-width:46ch;margin-bottom:26px}
+.acts{display:flex;flex-wrap:wrap;gap:12px}
+.trust{margin-top:26px;font-size:14px;color:#8EA2BB;display:flex;flex-wrap:wrap;gap:8px 18px}
+.trust b{color:#fff;font-weight:700}
+
+.stage{display:flex;flex-direction:column;align-items:center;gap:18px}
+.phone{width:290px;background:#0A1A2E;border:9px solid #223650;border-radius:36px;padding:9px;box-shadow:0 30px 60px rgba(0,0,0,.45)}
+.screen{background:#fff;border-radius:26px;overflow:hidden;color:var(--ink)}
+.ph-top{background:var(--brand);color:#fff;padding:16px 16px 20px;transition:background .25s ease}
+.ph-row{display:flex;align-items:center;gap:11px}
+.ph-av{width:38px;height:38px;border-radius:11px;background:rgba(255,255,255,.22);display:grid;place-items:center;font-family:var(--disp);font-weight:800;font-size:21px}
+.ph-name{font-family:var(--disp);font-weight:800;font-size:20px;text-transform:uppercase;line-height:1;word-break:break-word}
+.ph-sub{font-size:11px;opacity:.85;margin-top:2px}
+.ph-hi{margin-top:16px;font-size:13px;opacity:.9}
+.ph-body{padding:14px}
+.ph-lbl{font-family:var(--disp);font-weight:700;text-transform:uppercase;letter-spacing:.1em;font-size:11px;color:var(--mute);margin-bottom:9px}
+.ph-item{display:flex;align-items:center;justify-content:space-between;gap:10px;padding:11px 12px;border:1px solid var(--line);border-radius:10px;margin-bottom:8px;font-size:14px}
+.ph-item b{font-family:var(--disp);font-weight:700;font-size:17px;color:var(--brand);transition:color .25s ease}
+.ph-cta{margin-top:6px;background:var(--brand);color:#fff;text-align:center;padding:13px;border-radius:10px;font-family:var(--disp);font-weight:700;text-transform:uppercase;letter-spacing:.06em;font-size:16px;transition:background .25s ease}
+.ph-note{text-align:center;font-size:11px;color:var(--mute);padding:0 14px 14px}
+
+.tuner{width:290px;background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.16);border-radius:12px;padding:14px}
+.tuner label{display:block;font-family:var(--disp);font-weight:700;text-transform:uppercase;letter-spacing:.11em;font-size:11px;color:var(--citrus);margin-bottom:7px}
+.tuner input{width:100%;padding:11px 12px;border-radius:8px;border:1px solid rgba(255,255,255,.22);background:rgba(0,0,0,.25);color:#fff;font-family:var(--body);font-size:15px}
+.tuner input::placeholder{color:#7A8DA6}
+.swatches{display:flex;gap:9px;margin-top:12px}
+.sw{width:34px;height:34px;border-radius:9px;border:2px solid transparent;cursor:pointer;padding:0}
+.sw[aria-pressed="true"]{border-color:#fff;box-shadow:0 0 0 3px rgba(255,255,255,.18)}
+
+section{padding:70px 0}
+.sec-head{max-width:60ch;margin-bottom:38px}
+.sec-head .eyebrow{color:var(--navy-2);margin-bottom:10px}
+.sec-head p{color:#41556E;margin-top:14px}
+.paper{background:var(--paper)}
+
+.cards{display:grid;grid-template-columns:1fr;gap:18px}
+.card{background:#fff;border:1px solid var(--line);border-radius:14px;padding:22px}
+.card .tag{font-family:var(--disp);font-weight:700;text-transform:uppercase;letter-spacing:.1em;font-size:11px;color:#fff;display:inline-block;padding:4px 9px;border-radius:3px;margin-bottom:13px}
+.card p{font-size:15.5px;color:#41556E;margin-top:8px}
+.card ul{list-style:none;margin-top:13px;font-size:14.5px;color:#41556E}
+.card li{padding-left:20px;position:relative;margin-bottom:5px}
+.card li::before{content:"";position:absolute;left:0;top:9px;width:9px;height:2px;background:var(--dot,var(--navy))}
+.card .open{display:inline-flex;align-items:center;gap:7px;margin-top:18px;font-family:var(--disp);font-weight:700;text-transform:uppercase;letter-spacing:.06em;font-size:16px;text-decoration:none;padding:11px 18px;border-radius:4px;color:#fff;background:var(--dot,var(--navy))}
+
+.steps{display:grid;grid-template-columns:1fr;gap:2px;background:var(--line);border:1px solid var(--line);border-radius:14px;overflow:hidden}
+.step{background:#fff;padding:24px}
+.step .n{font-family:var(--disp);font-weight:800;font-size:46px;line-height:1;color:var(--citrus);-webkit-text-stroke:1.5px var(--navy)}
+.step h3{margin:8px 0 6px}
+.step p{font-size:15px;color:#41556E}
+
+.incl{display:grid;grid-template-columns:1fr;gap:10px;list-style:none}
+.incl li{display:flex;gap:11px;align-items:flex-start;font-size:16px;background:#fff;border:1px solid var(--line);border-radius:10px;padding:14px 16px}
+.incl .ck{flex:0 0 auto;width:21px;height:21px;border-radius:50%;background:var(--navy);color:var(--citrus);display:grid;place-items:center;font-size:12px;font-weight:700;margin-top:1px}
+
+.price{background:var(--navy);color:#fff;border-radius:16px;padding:32px 26px;text-align:center;position:relative;overflow:hidden}
+.price::before{content:"";position:absolute;inset:auto -20% -60px;height:150px;background:var(--citrus);opacity:.1;transform:rotate(-6deg)}
+.price .from{font-family:var(--disp);font-weight:700;text-transform:uppercase;letter-spacing:.14em;font-size:13px;color:#93A6BE;position:relative}
+.price .big{font-family:var(--disp);font-weight:800;font-size:clamp(46px,11vw,74px);line-height:.9;color:var(--citrus);position:relative}
+.price .plus{font-size:19px;margin-top:14px;position:relative}
+.price .plus b{color:var(--citrus)}
+.price .split{position:relative;margin:22px auto 0;max-width:420px;display:grid;grid-template-columns:25fr 75fr;gap:6px}
+.price .split div{background:rgba(255,255,255,.09);border-radius:6px;padding:11px 8px}
+.price .split div:last-child{background:rgba(255,196,49,.18)}
+.price .split b{display:block;font-family:var(--disp);font-weight:800;font-size:26px;color:var(--citrus);line-height:1}
+.price .split small{font-size:12px;color:#C7D3E2}
+.price .fine{color:#A9BACE;font-size:14.5px;margin-top:16px;max-width:44ch;margin-left:auto;margin-right:auto;position:relative}
+.price .btn{margin-top:22px;position:relative}
+
+.faq{display:grid;gap:12px}
+.qa{background:#fff;border:1px solid var(--line);border-radius:12px;padding:20px 22px}
+.qa h3{font-size:19px;margin-bottom:8px}
+.qa p{font-size:15.5px;color:#41556E}
+
+.final{background:var(--citrus);color:var(--navy);text-align:center;padding:66px 0}
+.final h2{margin-bottom:14px}
+.final p{max-width:44ch;margin:0 auto 24px;font-size:18px}
+footer{background:var(--navy);color:#8EA2BB;padding:30px 0;font-size:14px;text-align:center}
+footer b{color:#fff}
+
+.ovl{position:fixed;inset:0;background:rgba(10,22,38,.72);backdrop-filter:blur(3px);z-index:100;display:none;align-items:flex-end;justify-content:center}
+.ovl.on{display:flex}
+.modal{background:#fff;width:100%;max-width:560px;max-height:92vh;border-radius:18px 18px 0 0;display:flex;flex-direction:column;overflow:hidden}
+.md-top{background:var(--navy);color:#fff;padding:20px 22px;flex:0 0 auto;position:relative}
+.md-top h3{font-size:26px;color:var(--citrus)}
+.md-top p{font-size:14.5px;color:#C7D3E2;margin-top:7px}
+.md-x{position:absolute;top:16px;right:16px;width:32px;height:32px;border-radius:50%;background:rgba(255,255,255,.14);color:#fff;border:0;font-size:17px;cursor:pointer;line-height:1}
+.md-body{overflow-y:auto;padding:20px 22px 8px}
+.q{margin-bottom:22px}
+.q>label{display:block;font-family:var(--disp);font-weight:700;text-transform:uppercase;letter-spacing:.09em;font-size:12px;color:var(--navy-2);margin-bottom:9px}
+.opts{display:flex;flex-wrap:wrap;gap:8px}
+.opt{border:1.5px solid var(--line);background:#fff;border-radius:8px;padding:11px 14px;font-family:var(--body);font-size:15px;cursor:pointer;color:var(--ink)}
+.opt[aria-pressed="true"]{border-color:var(--navy);background:var(--navy);color:#fff}
+.q input,.q textarea{width:100%;border:1.5px solid var(--line);border-radius:8px;padding:12px 14px;font-family:var(--body);font-size:16px;color:var(--ink)}
+.q textarea{resize:none;height:80px}
+.md-foot{border-top:1px solid var(--line);padding:16px 22px calc(18px + env(safe-area-inset-bottom));flex:0 0 auto;background:var(--paper)}
+.md-foot .sendlbl{font-family:var(--disp);font-weight:700;text-transform:uppercase;letter-spacing:.1em;font-size:12px;color:var(--mute);margin-bottom:10px;text-align:center}
+.sends{display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px}
+.send{border:0;border-radius:8px;padding:14px 6px;font-family:var(--disp);font-weight:700;text-transform:uppercase;letter-spacing:.05em;font-size:16px;cursor:pointer;background:var(--navy);color:#fff;display:flex;flex-direction:column;align-items:center;gap:4px}
+.send .em{font-size:19px}
+.send:first-child{background:#25D366;color:#07301A}
+@media(min-width:600px){.ovl{align-items:center}.modal{border-radius:18px}}
+@media(min-width:820px){
+  .hero-grid{grid-template-columns:1.05fr .95fr;align-items:center;gap:50px}
+  .cards{grid-template-columns:repeat(3,1fr)}
+  .steps{grid-template-columns:repeat(3,1fr)}
+  .incl{grid-template-columns:1fr 1fr}
+  .phone,.tuner{width:320px}
+  section{padding:92px 0}
+}
+@media(prefers-reduced-motion:reduce){*{transition:none!important;scroll-behavior:auto!important}.btn:hover{transform:none}}
+</style>
+</head>
+<body>
+
+<header class="hero">
+  <div class="wrap">
+    <nav class="nav">
+      <div class="logo"><span></span>Duofront</div>
+      <div class="langs" role="group" aria-label="Language">
+        <button class="lg" data-lang="pt" aria-pressed="true">PT</button>
+        <button class="lg" data-lang="en" aria-pressed="false">EN</button>
+        <button class="lg" data-lang="es" aria-pressed="false">ES</button>
+      </div>
+      <div class="loc" data-i="loc"></div>
+    </nav>
+
+    <div class="hero-grid">
+      <div>
+        <h1><span data-i="h1a"></span><br><em data-i="h1b"></em></h1>
+        <p class="lead" data-i="lead"></p>
+        <div class="acts">
+          <a class="btn btn-pri" data-wa href="#" data-i="ctaWa"></a>
+          <a class="btn btn-gho" href="#demos" data-i="ctaDemos"></a>
+        </div>
+        <div class="trust">
+          <span data-ih="t1"></span><span data-ih="t2"></span><span data-ih="t3"></span>
+        </div>
+      </div>
+
+      <div class="stage">
+        <div class="phone">
+          <div class="screen">
+            <div class="ph-top">
+              <div class="ph-row">
+                <div class="ph-av" id="phAv">L</div>
+                <div>
+                  <div class="ph-name" id="phName">Lava-Jato do Léo</div>
+                  <div class="ph-sub" data-i="phSub"></div>
+                </div>
+              </div>
+              <div class="ph-hi" data-i="phHi"></div>
+            </div>
+            <div class="ph-body">
+              <div class="ph-lbl" data-i="phLbl"></div>
+              <div class="ph-item"><span data-i="phI1"></span><b>$45</b></div>
+              <div class="ph-item"><span data-i="phI2"></span><b>$90</b></div>
+              <div class="ph-item"><span data-i="phI3"></span><b>$65</b></div>
+              <div class="ph-cta" data-i="phCta"></div>
+            </div>
+            <div class="ph-note" data-i="phNote"></div>
+          </div>
+        </div>
+
+        <div class="tuner">
+          <label for="bizName" data-i="tunerLbl"></label>
+          <input id="bizName" type="text" maxlength="26" autocomplete="off">
+          <div class="swatches" role="group" aria-label="Brand color">
+            <button class="sw" style="background:#0F7B62" data-c="#0F7B62" aria-label="Green" aria-pressed="true"></button>
+            <button class="sw" style="background:#C1382B" data-c="#C1382B" aria-label="Red" aria-pressed="false"></button>
+            <button class="sw" style="background:#1E5FBF" data-c="#1E5FBF" aria-label="Blue" aria-pressed="false"></button>
+            <button class="sw" style="background:#6D3FBF" data-c="#6D3FBF" aria-label="Purple" aria-pressed="false"></button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</header>
+
+<section class="paper" id="demos">
+  <div class="wrap">
+    <div class="sec-head">
+      <div class="eyebrow" data-i="demEye"></div>
+      <h2 data-i="demH2"></h2>
+      <p data-i="demP"></p>
+    </div>
+    <div class="cards">
+      <article class="card" style="--dot:#0F5C4E">
+        <div class="tag" style="background:#0F5C4E" data-i="d1tag"></div>
+        <h3>CasaPro</h3>
+        <p data-i="d1p"></p>
+        <ul><li data-i="d1a"></li><li data-i="d1b"></li><li data-i="d1c"></li><li data-i="d1d"></li></ul>
+        <a class="open" href="demo-casapro.html" data-demo data-i="openDemo"></a>
+      </article>
+      <article class="card" style="--dot:#D4482A">
+        <div class="tag" style="background:#D4482A" data-i="d2tag"></div>
+        <h3>Forno &amp; Brasa</h3>
+        <p data-i="d2p"></p>
+        <ul><li data-i="d2a"></li><li data-i="d2b"></li><li data-i="d2c"></li><li data-i="d2d"></li></ul>
+        <a class="open" href="demo-forno.html" data-demo data-i="openDemo"></a>
+      </article>
+      <article class="card" style="--dot:#1B2C4F">
+        <div class="tag" style="background:#1B2C4F" data-i="d3tag"></div>
+        <h3>VipRide Orlando</h3>
+        <p data-i="d3p"></p>
+        <ul><li data-i="d3a"></li><li data-i="d3b"></li><li data-i="d3c"></li><li data-i="d3d"></li></ul>
+        <a class="open" href="demo-vipride.html" data-demo data-i="openDemo"></a>
+      </article>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <div class="sec-head">
+      <div class="eyebrow" data-i="howEye"></div>
+      <h2 data-i="howH2"></h2>
+    </div>
+    <div class="steps">
+      <div class="step"><div class="n">1</div><h3 data-i="s1h"></h3><p data-i="s1p"></p></div>
+      <div class="step"><div class="n">2</div><h3 data-i="s2h"></h3><p data-i="s2p"></p></div>
+      <div class="step"><div class="n">3</div><h3 data-i="s3h"></h3><p data-i="s3p"></p></div>
+    </div>
+  </div>
+</section>
+
+<section class="paper">
+  <div class="wrap">
+    <div class="sec-head">
+      <div class="eyebrow" data-i="incEye"></div>
+      <h2 data-i="incH2"></h2>
+    </div>
+    <ul class="incl" id="incList"></ul>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <div class="price">
+      <div class="from" data-i="prFrom"></div>
+      <div class="big">$1.200</div>
+      <div class="plus" data-ih="prPlus"></div>
+      <div class="split">
+        <div><b>25%</b><small data-i="prA"></small></div>
+        <div><b>75%</b><small data-i="prB"></small></div>
+      </div>
+      <p class="fine" data-i="prFine"></p>
+      <a class="btn btn-pri" data-wa href="#" data-i="prCta"></a>
+    </div>
+  </div>
+</section>
+
+<section class="paper">
+  <div class="wrap">
+    <div class="sec-head">
+      <div class="eyebrow" data-i="faqEye"></div>
+      <h2 data-i="faqH2"></h2>
+    </div>
+    <div class="faq" id="faqList"></div>
+  </div>
+</section>
+
+<section class="final">
+  <div class="wrap">
+    <h2 data-i="fH2"></h2>
+    <p data-i="fP"></p>
+    <a class="btn btn-dark" data-wa href="#" data-i="fCta"></a>
+  </div>
+</section>
+
+<div class="ovl" id="ovl" role="dialog" aria-modal="true" aria-labelledby="mdTitle">
+  <div class="modal">
+    <div class="md-top">
+      <button class="md-x" id="mdX" aria-label="X">✕</button>
+      <h3 id="mdTitle" data-i="fmTitle"></h3>
+      <p data-i="fmSub"></p>
+    </div>
+    <div class="md-body" id="mdBody"></div>
+    <div class="md-foot">
+      <div class="sendlbl" data-i="fmSend"></div>
+      <div class="sends">
+        <button class="send" data-send="wa"><span class="em">💬</span><span data-i="fmWa"></span></button>
+        <button class="send" data-send="mail"><span class="em">✉️</span><span data-i="fmEmail"></span></button>
+        <button class="send" data-send="sms"><span class="em">📱</span><span data-i="fmSms"></span></button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<footer><div class="wrap"><b>Duofront</b> <span data-i="foot"></span></div></footer>
+
+<script>
+/* ============================================================
+   TROQUE AQUI O SEU NÚMERO (país + DDD, só dígitos)
+   ============================================================ */
+const WHATSAPP = "13215550123";
+const SMS_NUM  = "+13215550123";
+const EMAIL    = "contato@duofront.com";
+
+const I18N = {
+pt:{
+  htmlLang:"pt-BR",
+  waMsg:"Oi! Vi a página da Duofront e queria saber mais.",
+  fmTitle:"Vamos ao seu orçamento",
+  fmSub:"Cinco perguntas rápidas. No fim você escolhe WhatsApp, e-mail ou SMS — a mensagem já vai escrita.",
+  fmQ:[["O seu negócio é...",["Serviço (marca horário)","Comércio (vende produto)","Os dois"]],
+       ["Você quer...",["App e site","Só o app","Só o site","Ainda não sei"]],
+       ["Precisa publicar nas lojas de app?",["Sim, Android e iPhone","Só Android","Não, o link já basta","Não sei"]],
+       ["Como o cliente paga hoje?",["No local","Pix ou transferência","Cartão online","Quero cobrar pelo app"]],
+       ["Para quando?",["Esse mês","Em 2 ou 3 meses","Só pesquisando"]]],
+  fmLbl:["Negócio","Quero","Lojas","Pagamento","Prazo"],
+  fmName:"Seu nome e o do negócio",fmNamePh:"Ex.: Marcos — Lava-Jato do Léo",
+  fmNote:"Quer contar mais alguma coisa? (opcional)",fmNotePh:"Ex.: tenho 3 funcionários e perco cliente por falta de horário",
+  fmSend:"Enviar por",fmWa:"WhatsApp",fmEmail:"E-mail",fmSms:"SMS",
+  fmIntro:"Olá! Vim pela página da Duofront e queria um orçamento.",
+  fmSubject:"Orçamento Duofront",fmNameLbl:"Nome",fmNotLbl:"Obs.",
+  loc:"Winter Garden, Orlando · e Brasil online",
+  h1a:"O app e o site do seu negócio.", h1b:"Com o seu nome neles.",
+  lead:"Agendamento, pedidos e lembrete automático antes de cada horário. App, site ou os dois — você escolhe. Feito sob medida para o seu serviço, sem template de prateleira e sem comissão por venda.",
+  ctaWa:"Pedir orçamento", ctaDemos:"Ver as três demos",
+  t1:"<b>3 semanas</b> do sim até o ar", t2:"<b>Sem comissão</b> por pedido", t3:"<b>App, site</b> ou os dois",
+  phSub:"Aberto · responde em 10 min", phHi:"Olá, Marcos 👋 O que você precisa hoje?",
+  phLbl:"Serviços", phI1:"Lavagem completa", phI2:"Enceramento", phI3:"Limpeza interna",
+  phCta:"Escolher horário", phNote:"Lembrete automático 24h e 1h antes",
+  tunerLbl:"Escreva o nome do seu negócio", tunerPh:"Ex.: Lava-Jato do Léo", defName:"Lava-Jato do Léo",
+  demEye:"Toque e use — funciona de verdade", demH2:"Três exemplos prontos",
+  demP:"Não são imagens. São aplicativos rodando, cada um com a cara de um tipo de negócio. Abra no celular e agende, peça ou faça um orçamento até o fim.",
+  openDemo:"Abrir demo →",
+  d1tag:"Serviços em casa", d1p:"Lavagem de carro, limpeza de carpete, lixeiras, pressure washing, limpeza de casa.",
+  d1a:"Cliente escolhe serviço, dia e hora sozinho", d1b:"Preço já aparece na hora", d1c:"Lembrete 24h antes corta a falta", d1d:"Serviço recorrente com um toque",
+  d2tag:"Comida e pedidos", d2p:"Pizzaria, marmita, comida caseira, doces por encomenda.",
+  d2a:"Cardápio, carrinho e checkout", d2b:"Pedido chega direto no seu WhatsApp", d2c:"Cliente acompanha o preparo", d2d:"Zero comissão de aplicativo",
+  d3tag:"Transfer e passeios", d3p:"Traslado do aeroporto, parques, outlets, diária de motorista.",
+  d3a:"Orçamento automático por rota e veículo", d3b:"Passageiros, malas e cadeirinha", d3c:"Reserva com código e confirmação", d3d:"Lembrete no dia da viagem",
+  howEye:"Do primeiro contato até o ar", howH2:"Como funciona",
+  s1h:"Conversa de 20 minutos", s1p:"Você me conta como o seu trabalho funciona hoje: o que vende, quanto cobra, como o cliente marca. Sem compromisso.",
+  s2h:"Você aprova antes", s2p:"Em poucos dias você recebe o aplicativo com o seu nome, suas cores e os seus preços, para abrir no celular e testar. Ajusto até ficar certo.",
+  s3h:"No ar em 3 semanas", s3p:"Fica publicado com um link só seu, que o cliente instala na tela do celular. Você manda por WhatsApp, coloca na bio e no carro.",
+  incEye:"Sem letra miúda", incH2:"O que vem junto",
+  inc:["Aplicativo instalável no celular, com a sua marca e as suas cores",
+       "Site com a mesma cara do app, para quem te acha pelo Google",
+       "Agendamento ou pedido, com os seus preços e horários",
+       "Lembrete automático 24h e 1h antes, por notificação e e-mail",
+       "Aviso do pedido direto no seu WhatsApp",
+       "Painel simples para ver a agenda do dia e os clientes",
+       "Funciona em português, inglês e espanhol, na escolha do cliente",
+       "Hospedagem, backup e correções inclusos na mensalidade",
+       "Treino de 30 minutos com você para usar tudo",
+       "Endereço próprio na internet, no nome do seu negócio",
+       "Domínio .com incluso no primeiro ano, registrado no nome do seu negócio",
+       "Ajudo a publicar o app na Play Store e na App Store, do começo ao fim"],
+  prFrom:"Montagem, uma vez só, a partir de", prPlus:"e depois <b>$99/mês</b> de hospedagem e suporte",
+  prA:"para começar", prB:"só na entrega",
+  prFine:"Você paga 25% para eu começar e os 75% só quando o aplicativo estiver funcionando na sua mão. O domínio .com do primeiro ano já está incluso. Cancela quando quiser — sem multa, e o seu conteúdo vai com você.",
+  prCta:"Pedir orçamento",
+  faqEye:"Perguntas que todo mundo faz", faqH2:"Antes de você perguntar",
+  faq:[["Preciso levar o app e o site?","Não. Tem negócio que só precisa do app, porque o cliente já é conhecido e volta sempre. Tem negócio que vive de quem procura no Google e precisa do site primeiro. Os dois juntos custam menos do que contratados separado, mas quem decide é você — na conversa eu digo o que faz mais sentido pro seu caso."],
+       ["Já uso Booksy / Square / iFood. Por que trocar?","Talvez não precise trocar. A diferença é que ali o cliente vê o seu concorrente na mesma tela, o aplicativo é da empresa e a comissão sai do seu bolso. Aqui é o seu nome, a sua lista de clientes e nenhum percentual por venda. Se o seu volume for pequeno, a plataforma pronta pode sair mais barata — eu falo isso na conversa em vez de te empurrar um serviço."],
+       ["Vai para a App Store e a Play Store?","Vai, e eu faço esse trabalho junto com você. Ele já instala na tela do celular pelo link, sem depender de loja — é assim que quase todo mundo começa, porque é imediato. Quando você quiser as lojas, eu preparo os arquivos, as imagens e os textos e acompanho o envio até sair aprovado. As taxas são cobradas pelas próprias lojas e ficam na sua conta: o Google cobra $25 uma vez só, e a Apple cobra $99 por ano."],
+       ["Não entendo nada de tecnologia.","Não precisa entender. Você me passa a lista de serviços e preços por WhatsApp, do jeito que souber escrever, e eu monto. Mudança de preço depois é um pedido no WhatsApp."],
+       ["E se eu não gostar?","Você vê o aplicativo funcionando antes de pagar os 75%. Se não ficar do jeito que você quer, ajusto. Se ainda assim não servir, você não paga o resto."]],
+  fH2:"Manda uma mensagem", fP:"Diga o que você faz e como o cliente marca hoje. Em 20 minutos eu digo se vale a pena para o seu caso — e se não valer, eu falo.",
+  fCta:"Pedir orçamento",
+  foot:"· Winter Garden, FL · App e site sob medida para negócios pequenos"
+},
+en:{
+  htmlLang:"en",
+  waMsg:"Hi! I saw the Duofront page and I'd like to know more.",
+  fmTitle:"Let's get your quote",
+  fmSub:"Five quick questions. At the end you pick WhatsApp, email or SMS — the message comes already written.",
+  fmQ:[["Your business is...",["Service (by appointment)","Retail (sells products)","Both"]],
+       ["You want...",["App and website","Just the app","Just the website","Not sure yet"]],
+       ["Do you need it on the app stores?",["Yes, Android and iPhone","Android only","No, a link is enough","Not sure"]],
+       ["How do customers pay today?",["In person","Bank transfer / Zelle","Card online","I want to charge in the app"]],
+       ["What's your timing?",["This month","In 2 or 3 months","Just looking"]]],
+  fmLbl:["Business","Wants","Stores","Payment","Timing"],
+  fmName:"Your name and your business name",fmNamePh:"e.g. Marcus — Leo's Car Wash",
+  fmNote:"Anything else worth knowing? (optional)",fmNotePh:"e.g. I have 3 staff and lose customers to missed bookings",
+  fmSend:"Send by",fmWa:"WhatsApp",fmEmail:"Email",fmSms:"SMS",
+  fmIntro:"Hi! I came from the Duofront page and I'd like a quote.",
+  fmSubject:"Duofront quote",fmNameLbl:"Name",fmNotLbl:"Notes",
+  loc:"Winter Garden, Orlando · and Brazil online",
+  h1a:"Your business has an app and a site.", h1b:"Both with your name on them.",
+  lead:"Booking, orders and an automatic reminder before every appointment. App, website or both — your call. Built around how you actually work, with no off-the-shelf template and no commission on your sales.",
+  ctaWa:"Get a quote", ctaDemos:"See the three demos",
+  t1:"<b>3 weeks</b> from yes to live", t2:"<b>No commission</b> per order", t3:"<b>App, site</b> or both",
+  phSub:"Open · replies in 10 min", phHi:"Hi Marcus 👋 What do you need today?",
+  phLbl:"Services", phI1:"Full wash", phI2:"Wax and polish", phI3:"Interior detail",
+  phCta:"Pick a time", phNote:"Automatic reminder 24h and 1h before",
+  tunerLbl:"Type your business name", tunerPh:"e.g. Leo's Car Wash", defName:"Leo's Car Wash",
+  demEye:"Tap around — they really work", demH2:"Three ready examples",
+  demP:"These aren't screenshots. They're running apps, each shaped for a different kind of business. Open one on your phone and book, order or price a trip all the way through.",
+  openDemo:"Open demo →",
+  d1tag:"Home services", d1p:"Car wash, carpet cleaning, bin cleaning, pressure washing, house cleaning.",
+  d1a:"Customers pick service, day and time themselves", d1b:"Price shows up right away", d1c:"A 24h reminder cuts no-shows", d1d:"Recurring service in one tap",
+  d2tag:"Food and orders", d2p:"Pizzeria, meal prep, home cooking, custom desserts.",
+  d2a:"Menu, cart and checkout", d2b:"Orders land straight in your WhatsApp", d2c:"Customers follow the kitchen", d2d:"Zero delivery-app commission",
+  d3tag:"Transfers and tours", d3p:"Airport pickup, parks, outlets, driver by the hour.",
+  d3a:"Automatic quote by route and vehicle", d3b:"Passengers, bags and car seats", d3c:"Booking code and confirmation", d3d:"Reminder on travel day",
+  howEye:"From first hello to live", howH2:"How it works",
+  s1h:"A 20-minute call", s1p:"You tell me how your work runs today: what you sell, what you charge, how people book you. No commitment.",
+  s2h:"You approve it first", s2p:"Within days you get the app with your name, your colors and your prices, to open on your phone and try. I adjust until it's right.",
+  s3h:"Live in 3 weeks", s3p:"It goes up on a link that's yours alone, and customers install it on their phone screen. Send it on WhatsApp, put it in your bio and on your truck.",
+  incEye:"No fine print", incH2:"What's included",
+  inc:["An app that installs on the phone, with your brand and your colors",
+       "A website that matches the app, for people who find you on Google",
+       "Booking or ordering, with your own prices and hours",
+       "Automatic reminder 24h and 1h before, by notification and email",
+       "Order alerts straight to your WhatsApp",
+       "A simple panel to see the day's schedule and your customers",
+       "Works in English, Portuguese and Spanish, your customer picks",
+       "Hosting, backups and fixes included in the monthly fee",
+       "A 30-minute walkthrough with you so you can run it",
+       "Your own web address, in your business name",
+       "A .com domain included for the first year, in your business name",
+       "I walk you through publishing on Google Play and the App Store"],
+  prFrom:"One-time build, starting at", prPlus:"then <b>$99/month</b> for hosting and support",
+  prA:"to get started", prB:"only on delivery",
+  prFine:"You pay 25% for me to start and the other 75% only once the app is working in your hand. The first year of your .com domain is included. Cancel anytime — no penalty, and your content leaves with you.",
+  prCta:"Get a quote",
+  faqEye:"What everyone asks", faqH2:"Before you ask",
+  faq:[["Do I need both the app and the site?","No. Some businesses only need the app, because their customers already know them and come back. Others live on people searching Google and need the site first. Together they cost less than buying each separately, but it's your call — on the call I'll tell you what actually fits."],
+       ["I already use Booksy / Square / DoorDash. Why switch?","Maybe you shouldn't. The difference is that there your competitor sits on the same screen, the app belongs to the company, and the commission comes out of your pocket. Here it's your name, your customer list and no cut of your sales. If your volume is small, an off-the-shelf platform may well be cheaper — I'll say so instead of pushing this on you."],
+       ["Will it go on the App Store and Play Store?","Yes, and I do that part with you. It already installs on the phone screen from a link, with no store in between — that's how almost everyone starts, because it's immediate. When you want the stores, I prepare the files, the images and the listing text and stay with you until it's approved. The fees are charged by the stores and stay in your account: Google charges $25 once, Apple charges $99 a year."],
+       ["I'm not a tech person.","You don't need to be. Send me your list of services and prices on WhatsApp, written however you write, and I build it. Changing a price later is one message."],
+       ["What if I don't like it?","You see the app working before you pay the 75%. If it isn't how you want it, I adjust. If it still doesn't fit, you don't pay the rest."]],
+  fH2:"Send a message", fP:"Tell me what you do and how people book you today. In 20 minutes I'll tell you whether this is worth it for you — and if it isn't, I'll say so.",
+  fCta:"Get a quote",
+  foot:"· Winter Garden, FL · Custom apps and websites for small businesses"
+},
+es:{
+  htmlLang:"es",
+  waMsg:"¡Hola! Vi la página de Duofront y quisiera saber más.",
+  fmTitle:"Vamos a tu cotización",
+  fmSub:"Cinco preguntas rápidas. Al final eliges WhatsApp, correo o SMS — el mensaje ya va escrito.",
+  fmQ:[["Tu negocio es...",["Servicio (con cita)","Comercio (vende producto)","Los dos"]],
+       ["Quieres...",["App y sitio","Solo la app","Solo el sitio","Todavía no sé"]],
+       ["¿Necesitas publicarla en las tiendas?",["Sí, Android e iPhone","Solo Android","No, con el enlace basta","No sé"]],
+       ["¿Cómo te pagan hoy?",["En persona","Transferencia","Tarjeta en línea","Quiero cobrar en la app"]],
+       ["¿Para cuándo?",["Este mes","En 2 o 3 meses","Solo estoy viendo"]]],
+  fmLbl:["Negocio","Quiere","Tiendas","Pago","Plazo"],
+  fmName:"Tu nombre y el de tu negocio",fmNamePh:"Ej.: Marcos — Autolavado de Leo",
+  fmNote:"¿Algo más que deba saber? (opcional)",fmNotePh:"Ej.: tengo 3 empleados y pierdo clientes por citas olvidadas",
+  fmSend:"Enviar por",fmWa:"WhatsApp",fmEmail:"Correo",fmSms:"SMS",
+  fmIntro:"¡Hola! Vine por la página de Duofront y quisiera una cotización.",
+  fmSubject:"Cotización Duofront",fmNameLbl:"Nombre",fmNotLbl:"Nota",
+  loc:"Winter Garden, Orlando · y Brasil en línea",
+  h1a:"La app y el sitio de tu negocio.", h1b:"Con tu nombre en ellos.",
+  lead:"Reservas, pedidos y recordatorio automático antes de cada cita. App, sitio o los dos — tú eliges. Hecho a la medida de tu servicio, sin plantilla de estante y sin comisión por venta.",
+  ctaWa:"Pedir cotización", ctaDemos:"Ver las tres demos",
+  t1:"<b>3 semanas</b> del sí al aire", t2:"<b>Sin comisión</b> por pedido", t3:"<b>App, sitio</b> o los dos",
+  phSub:"Abierto · responde en 10 min", phHi:"Hola, Marcos 👋 ¿Qué necesitas hoy?",
+  phLbl:"Servicios", phI1:"Lavado completo", phI2:"Encerado", phI3:"Limpieza interior",
+  phCta:"Elegir horario", phNote:"Recordatorio automático 24h y 1h antes",
+  tunerLbl:"Escribe el nombre de tu negocio", tunerPh:"Ej.: Autolavado de Leo", defName:"Autolavado de Leo",
+  demEye:"Tócalas — funcionan de verdad", demH2:"Tres ejemplos listos",
+  demP:"No son imágenes. Son aplicaciones funcionando, cada una con la cara de un tipo de negocio. Ábrelas en el celular y reserva, pide o cotiza hasta el final.",
+  openDemo:"Abrir demo →",
+  d1tag:"Servicios a domicilio", d1p:"Lavado de autos, limpieza de alfombras, botes de basura, pressure washing, limpieza de casa.",
+  d1a:"El cliente elige servicio, día y hora solo", d1b:"El precio aparece al instante", d1c:"El recordatorio de 24h corta las faltas", d1d:"Servicio recurrente con un toque",
+  d2tag:"Comida y pedidos", d2p:"Pizzería, comida preparada, comida casera, postres por encargo.",
+  d2a:"Menú, carrito y pago", d2b:"El pedido llega directo a tu WhatsApp", d2c:"El cliente sigue la preparación", d2d:"Cero comisión de aplicación",
+  d3tag:"Traslados y paseos", d3p:"Traslado del aeropuerto, parques, outlets, chofer por hora.",
+  d3a:"Cotización automática por ruta y vehículo", d3b:"Pasajeros, maletas y silla de bebé", d3c:"Reserva con código y confirmación", d3d:"Recordatorio el día del viaje",
+  howEye:"Del primer contacto al aire", howH2:"Cómo funciona",
+  s1h:"Una llamada de 20 minutos", s1p:"Me cuentas cómo funciona tu trabajo hoy: qué vendes, cuánto cobras, cómo te reservan. Sin compromiso.",
+  s2h:"Tú apruebas antes", s2p:"En pocos días recibes la aplicación con tu nombre, tus colores y tus precios, para abrirla en el celular y probarla. La ajusto hasta que quede bien.",
+  s3h:"Al aire en 3 semanas", s3p:"Queda publicada en un enlace solo tuyo, que el cliente instala en la pantalla del celular. Lo mandas por WhatsApp, lo pones en la bio y en el carro.",
+  incEye:"Sin letra chica", incH2:"Qué incluye",
+  inc:["Aplicación instalable en el celular, con tu marca y tus colores",
+       "Sitio con la misma cara de la app, para quien te encuentra en Google",
+       "Reservas o pedidos, con tus precios y tus horarios",
+       "Recordatorio automático 24h y 1h antes, por notificación y correo",
+       "Aviso del pedido directo a tu WhatsApp",
+       "Un panel simple para ver la agenda del día y los clientes",
+       "Funciona en español, portugués e inglés, según elija el cliente",
+       "Hospedaje, respaldo y correcciones incluidos en la mensualidad",
+       "Media hora de entrenamiento contigo para usarlo todo",
+       "Dirección propia en internet, con el nombre de tu negocio",
+       "Dominio .com incluido el primer año, a nombre de tu negocio",
+       "Te acompaño para publicar la app en Google Play y la App Store"],
+  prFrom:"Montaje, una sola vez, desde", prPlus:"y luego <b>$99/mes</b> de hospedaje y soporte",
+  prA:"para empezar", prB:"solo al entregar",
+  prFine:"Pagas 25% para que yo empiece y el 75% restante solo cuando la aplicación esté funcionando en tu mano. El primer año del dominio .com va incluido. Cancelas cuando quieras — sin multa, y tu contenido se va contigo.",
+  prCta:"Pedir cotización",
+  faqEye:"Lo que todos preguntan", faqH2:"Antes de que preguntes",
+  faq:[["¿Necesito la app y el sitio?","No. Hay negocios que solo necesitan la app, porque el cliente ya los conoce y vuelve. Hay otros que viven de quien busca en Google y necesitan el sitio primero. Juntos cuestan menos que por separado, pero decides tú — en la llamada te digo qué tiene más sentido en tu caso."],
+       ["Ya uso Booksy / Square / DoorDash. ¿Por qué cambiar?","Quizá no debas. La diferencia es que ahí tu competencia aparece en la misma pantalla, la aplicación es de la empresa y la comisión sale de tu bolsillo. Aquí es tu nombre, tu lista de clientes y ningún porcentaje por venta. Si tu volumen es pequeño, la plataforma de estante puede salir más barata — te lo digo en vez de empujarte un servicio."],
+       ["¿Va a la App Store y a la Play Store?","Sí, y ese trabajo lo hago contigo. Ya se instala en la pantalla del celular desde un enlace, sin pasar por tienda — así empieza casi todo el mundo, porque es inmediato. Cuando quieras las tiendas, preparo los archivos, las imágenes y los textos y te acompaño hasta que quede aprobada. Las tarifas las cobran las tiendas y quedan en tu cuenta: Google cobra $25 una sola vez y Apple cobra $99 al año."],
+       ["No entiendo nada de tecnología.","No hace falta. Me pasas la lista de servicios y precios por WhatsApp, escrita como sepas, y yo la monto. Cambiar un precio después es un mensaje."],
+       ["¿Y si no me gusta?","Ves la aplicación funcionando antes de pagar el 75%. Si no queda como la quieres, la ajusto. Si aun así no te sirve, no pagas el resto."]],
+  fH2:"Mándame un mensaje", fP:"Dime qué haces y cómo te reservan hoy. En 20 minutos te digo si vale la pena en tu caso — y si no vale, te lo digo.",
+  fCta:"Pedir cotización",
+  foot:"· Winter Garden, FL · Apps y sitios a la medida para negocios pequeños"
+}};
+
+let lang = "pt";
+const input = document.getElementById("bizName");
+const phName = document.getElementById("phName");
+const phAv = document.getElementById("phAv");
+
+function pickLang(){
+  const q = new URLSearchParams(location.search).get("lang");
+  if(q && I18N[q]) return q;
+  try{ const s = localStorage.getItem("df_lang"); if(s && I18N[s]) return s; }catch(e){}
+  const n = (navigator.language||"pt").slice(0,2).toLowerCase();
+  return I18N[n] ? n : "en";
+}
+
+function apply(l){
+  lang = l;
+  const t = I18N[l];
+  document.documentElement.lang = t.htmlLang;
+  document.querySelectorAll("[data-i]").forEach(el=>{ el.textContent = t[el.dataset.i]; });
+  document.querySelectorAll("[data-ih]").forEach(el=>{ el.innerHTML = t[el.dataset.ih]; });
+  document.querySelectorAll(".lg").forEach(b=>b.setAttribute("aria-pressed", b.dataset.lang===l));
+
+  input.placeholder = t.tunerPh;
+  const v = input.value.trim() || t.defName;
+  phName.textContent = v;
+  phAv.textContent = v.charAt(0).toUpperCase();
+
+  document.getElementById("incList").innerHTML = t.inc.map(x=>
+    `<li><span class="ck">✓</span><span>${x}</span></li>`).join("");
+  document.getElementById("faqList").innerHTML = t.faq.map(q=>
+    `<div class="qa"><h3>${q[0]}</h3><p>${q[1]}</p></div>`).join("");
+
+  document.querySelectorAll("[data-wa]").forEach(a=>{ a.href = "#"; });
+  buildForm();
+  document.querySelectorAll("[data-demo]").forEach(a=>{
+    a.href = a.getAttribute("href").split("?")[0] + "?lang=" + l;
+  });
+  try{ localStorage.setItem("df_lang", l); }catch(e){}
+}
+
+document.querySelectorAll(".lg").forEach(b=>{
+  b.addEventListener("click",()=>apply(b.dataset.lang));
+});
+input.addEventListener("input",()=>{
+  const v = input.value.trim() || I18N[lang].defName;
+  phName.textContent = v;
+  phAv.textContent = v.charAt(0).toUpperCase();
+});
+document.querySelectorAll(".sw").forEach(b=>{
+  b.addEventListener("click",()=>{
+    document.querySelectorAll(".sw").forEach(o=>o.setAttribute("aria-pressed","false"));
+    b.setAttribute("aria-pressed","true");
+    document.documentElement.style.setProperty("--brand", b.dataset.c);
+  });
+});
+
+/* ---------- formulário de orçamento ---------- */
+const answers = [null,null,null,null,null];
+
+function buildForm(){
+  const t = I18N[lang];
+  document.getElementById("mdBody").innerHTML =
+    t.fmQ.map((q,i)=>`<div class="q"><label>${q[0]}</label><div class="opts" data-q="${i}">`+
+      q[1].map((o,j)=>`<button type="button" class="opt" data-o="${j}" aria-pressed="${answers[i]===j}">${o}</button>`).join("")+
+      `</div></div>`).join("") +
+    `<div class="q"><label>${t.fmName}</label><input id="fmName" type="text" placeholder="${t.fmNamePh}"></div>` +
+    `<div class="q"><label>${t.fmNote}</label><textarea id="fmNote" placeholder="${t.fmNotePh}"></textarea></div>`;
+}
+document.getElementById("mdBody").addEventListener("click",e=>{
+  const b = e.target.closest(".opt"); if(!b) return;
+  const box = b.parentElement, qi = +box.dataset.q;
+  answers[qi] = +b.dataset.o;
+  box.querySelectorAll(".opt").forEach(o=>o.setAttribute("aria-pressed", o===b));
+});
+function openForm(){
+  const nm = document.getElementById("fmName"), nt = document.getElementById("fmNote");
+  const keepN = nm ? nm.value : "", keepT = nt ? nt.value : "";
+  buildForm();
+  if(keepN) document.getElementById("fmName").value = keepN;
+  if(keepT) document.getElementById("fmNote").value = keepT;
+  document.getElementById("ovl").classList.add("on");
+  document.body.style.overflow = "hidden";
+}
+function closeForm(){
+  document.getElementById("ovl").classList.remove("on");
+  document.body.style.overflow = "";
+}
+function buildMsg(){
+  const t = I18N[lang], L = [t.fmIntro, ""];
+  t.fmQ.forEach((q,i)=>{ if(answers[i]!==null) L.push(t.fmLbl[i]+": "+q[1][answers[i]]); });
+  const nm = (document.getElementById("fmName")||{}).value || "";
+  const nt = (document.getElementById("fmNote")||{}).value || "";
+  if(nm.trim()) L.push(t.fmNameLbl+": "+nm.trim());
+  if(nt.trim()) L.push("", t.fmNotLbl+": "+nt.trim());
+  return L.join("\n");
+}
+document.querySelectorAll("[data-wa]").forEach(a=>{
+  a.addEventListener("click",e=>{ e.preventDefault(); openForm(); });
+});
+document.getElementById("mdX").addEventListener("click",closeForm);
+document.getElementById("ovl").addEventListener("click",e=>{ if(e.target.id==="ovl") closeForm(); });
+document.addEventListener("keydown",e=>{ if(e.key==="Escape") closeForm(); });
+
+document.querySelectorAll("[data-send]").forEach(b=>{
+  b.addEventListener("click",()=>{
+    const t = I18N[lang], msg = buildMsg(), k = b.dataset.send;
+    let url;
+    if(k==="wa")   url = "https://wa.me/"+WHATSAPP+"?text="+encodeURIComponent(msg);
+    if(k==="mail") url = "mailto:"+EMAIL+"?subject="+encodeURIComponent(t.fmSubject)+"&body="+encodeURIComponent(msg);
+    if(k==="sms")  url = "sms:"+SMS_NUM+"?&body="+encodeURIComponent(msg);
+    window.open(url,"_blank","noopener");
+  });
+});
+
+apply(pickLang());
+</script>
+</body>
+</html>
